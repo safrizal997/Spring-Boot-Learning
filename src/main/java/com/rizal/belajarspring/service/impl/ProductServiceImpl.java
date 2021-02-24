@@ -1,6 +1,9 @@
 package com.rizal.belajarspring.service.impl;
 
+import com.rizal.belajarspring.entity.CategoriesEntity;
 import com.rizal.belajarspring.entity.ProductEntity;
+import com.rizal.belajarspring.model.ProductRequest;
+import com.rizal.belajarspring.repository.CategoriesEntityRepository;
 import com.rizal.belajarspring.repository.ProductEntityRepository;
 import com.rizal.belajarspring.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,9 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    private ProductEntityRepository productEntityRepository;
+    ProductEntityRepository productEntityRepository;
+    @Autowired
+    CategoriesEntityRepository categoriesEntityRepository;
 
     @Override
     public List<ProductEntity> getAll() {
@@ -27,12 +32,28 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductEntity addProduct(ProductEntity productEntity) {
-        return productEntityRepository.save(productEntity);
+    public ProductEntity addProduct(ProductRequest productEntity) {
+
+        ProductEntity productToSave = new ProductEntity();
+        productToSave.setProductName(productEntity.getProductName());
+        productToSave.setProductPrice(productEntity.getProductPrice());
+        productToSave.setProductQuantity(productEntity.getProductQuantity());
+
+        String categoryId = "P";
+        if (!productEntity.getProductCategory().equals("")) {
+            categoryId = productEntity.getProductCategory();
+        }
+
+        Optional<CategoriesEntity> categoryProduct = categoriesEntityRepository
+                .findById(categoryId);
+
+        categoryProduct.ifPresent(productToSave::setProductCategory);
+
+         return productEntityRepository.save(productToSave);
     }
 
     @Override
-    public ProductEntity editProduct(String productId, ProductEntity productEntity) {
+    public ProductEntity editProduct(String productId, ProductRequest productEntity) {
         Optional<ProductEntity> productFromDB = productEntityRepository
                 .findById(productId);
 
@@ -53,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
         Optional<ProductEntity> productFromDB = productEntityRepository
                 .findById(productId);
 
-        if (productFromDB.isPresent()){
+        if (productFromDB.isPresent()) {
             productEntityRepository.deleteById(productId);
 
             return 1;

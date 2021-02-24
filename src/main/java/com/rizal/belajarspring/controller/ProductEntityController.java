@@ -2,6 +2,7 @@ package com.rizal.belajarspring.controller;
 
 
 import com.rizal.belajarspring.entity.ProductEntity;
+import com.rizal.belajarspring.model.ProductRequest;
 import com.rizal.belajarspring.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,12 +28,12 @@ public class ProductEntityController {
     }
 
     @PostMapping
-    public ProductEntity addProduct(@RequestBody ProductEntity productEntity){
+    public ProductEntity addProduct(@RequestBody ProductRequest productEntity){
         return productService.addProduct(productEntity);
     }
 
     @PutMapping("/{productId}")
-    public ProductEntity editProduct(@PathVariable ("productId") String productId, @RequestBody ProductEntity productEntity){
+    public ProductEntity editProduct(@PathVariable ("productId") String productId, @RequestBody ProductRequest productEntity){
         return productService.editProduct(productId,productEntity);
     }
 

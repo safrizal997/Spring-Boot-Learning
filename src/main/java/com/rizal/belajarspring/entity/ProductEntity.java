@@ -1,9 +1,6 @@
 package com.rizal.belajarspring.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -19,14 +16,15 @@ public class ProductEntity {
     private Double productPrice;
     @Column(name = "product_quantity", nullable = false)
     private Integer productQuantity = 0;
-    @Column(name = "product_category", nullable = false)
-    private Integer productCategory = 0;
 
+    @OneToOne
+    @JoinColumn(name = "product_category")
+    private CategoriesEntity productCategory ;
 
     public ProductEntity() {
     }
 
-    public ProductEntity(String productId, String productName, Double productPrice, Integer productQuantity, Integer productCategory) {
+    public ProductEntity(String productId, String productName, Double productPrice, Integer productQuantity, CategoriesEntity productCategory) {
         this.productId = productId;
         this.productName = productName;
         this.productPrice = productPrice;
@@ -66,11 +64,11 @@ public class ProductEntity {
         this.productQuantity = productQuantity;
     }
 
-    public Integer getProductCategory() {
+    public CategoriesEntity getProductCategory() {
         return productCategory;
     }
 
-    public void setProductCategory(Integer productCategory) {
+    public void setProductCategory(CategoriesEntity productCategory) {
         this.productCategory = productCategory;
     }
 }
