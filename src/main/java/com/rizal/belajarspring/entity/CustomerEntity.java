@@ -26,8 +26,7 @@ public class CustomerEntity {
     public CustomerEntity() {
     }
 
-    public CustomerEntity(Integer costumerId, String email, String userName, String cardNumber, String handPhone) {
-        this.costumerId = costumerId;
+    public CustomerEntity(String email, String userName, String cardNumber, String handPhone) {
         this.email = email;
         this.userName = userName;
         this.cardNumber = cardNumber;
