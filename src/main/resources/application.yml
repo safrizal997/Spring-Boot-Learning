@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: ProductApp
+    name: ProductAppService
   jpa:
     database: MYSQL
     show-sql: true

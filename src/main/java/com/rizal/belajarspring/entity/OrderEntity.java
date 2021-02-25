@@ -14,7 +14,7 @@ public class OrderEntity {
     private String orderId = UUID.randomUUID().toString();
 
     @Column(name = "trx_id", nullable = false)
-    private String trxId = "TRX-"+ new Date(System.currentTimeMillis()).toString();
+    private String trxId = "TRX-"+ System.currentTimeMillis();
 
     @OneToOne
     @JoinColumn(name = "customer_id")

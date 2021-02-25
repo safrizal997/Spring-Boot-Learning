@@ -7,6 +7,8 @@ import com.rizal.belajarspring.repository.CategoriesEntityRepository;
 import com.rizal.belajarspring.repository.ProductEntityRepository;
 import com.rizal.belajarspring.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +21,12 @@ public class ProductServiceImpl implements ProductService {
     ProductEntityRepository productEntityRepository;
     @Autowired
     CategoriesEntityRepository categoriesEntityRepository;
+
+
+    @Override
+    public Page<ProductEntity> getAllProductPagination(Pageable pageable) {
+        return productEntityRepository.findAll(pageable);
+    }
 
     @Override
     public List<ProductEntity> getAll() {

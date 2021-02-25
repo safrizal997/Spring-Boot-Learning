@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CustomerEntityImpl implements CustomerService {
+public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerEntityRepository customerEntityRepository;
