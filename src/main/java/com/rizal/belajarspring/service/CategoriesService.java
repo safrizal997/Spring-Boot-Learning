@@ -12,5 +12,5 @@ public interface CategoriesService {
 
     CategoriesEntity editCategory(String category_Id, CategoriesEntity categoriesEntity);
 
-    Integer deleteCategories(String category_Id);
+    Integer deleteCategory(String category_Id);
 }

@@ -40,20 +40,26 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductEntity addProduct(ProductRequest productEntity) {
+    public ProductEntity addProduct(ProductRequest productRequest) {
 
         ProductEntity productToSave = new ProductEntity();
-        productToSave.setProductName(productEntity.getProductName());
-        productToSave.setProductPrice(productEntity.getProductPrice());
-        productToSave.setProductQuantity(productEntity.getProductQuantity());
+        productToSave.setProductName(productRequest.getProductName());
+        productToSave.setProductPrice(productRequest.getProductPrice());
+        productToSave.setProductQuantity(productRequest.getProductQuantity());
 
         String categoryId = "P";
-        if (!productEntity.getProductCategory().equals("")) {
-            categoryId = productEntity.getProductCategory();
+        if (!productRequest.getProductCategory().equals("")) {
+            categoryId = productRequest.getProductCategory();
         }
 
         Optional<CategoriesEntity> categoryProduct = categoriesEntityRepository
                 .findById(categoryId);
+
+        /*
+        * if(categoryProduct.isPresent()){
+        *   productToSave.setProductCategory(categoryProduct.get());
+        * }
+        */
 
         categoryProduct.ifPresent(productToSave::setProductCategory);
 
@@ -61,15 +67,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductEntity editProduct(String productId, ProductRequest productEntity) {
+    public ProductEntity editProduct(String productId, ProductRequest productRequest) {
         Optional<ProductEntity> productFromDB = productEntityRepository
                 .findById(productId);
 
         if (productFromDB.isPresent()) {
             ProductEntity product = productFromDB.get();
-            product.setProductName(productEntity.getProductName());
-            product.setProductPrice(productEntity.getProductPrice());
-            product.setProductQuantity(productEntity.getProductQuantity());
+            product.setProductName(productRequest.getProductName());
+            product.setProductPrice(productRequest.getProductPrice());
+            product.setProductQuantity(productRequest.getProductQuantity());
 
             return productEntityRepository.save(product);
         }

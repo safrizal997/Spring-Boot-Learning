@@ -41,7 +41,7 @@ public class CategoriesServiceImpl implements CategoriesService {
     }
 
     @Override
-    public Integer deleteCategories(String category_Id) {
+    public Integer deleteCategory(String category_Id) {
         Optional<CategoriesEntity> categoriesFromDB = categoriesEntityRepository
                 .findById(category_Id);
 

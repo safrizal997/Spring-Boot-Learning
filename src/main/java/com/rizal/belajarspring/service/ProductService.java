@@ -15,9 +15,9 @@ public interface ProductService {
 
     ProductEntity getProduct(String productId);
 
-    ProductEntity addProduct(ProductRequest productEntity);
+    ProductEntity addProduct(ProductRequest productRequest);
 
-    ProductEntity editProduct(String productId, ProductRequest productEntity);
+    ProductEntity editProduct(String productId, ProductRequest productRequest);
 
     Integer deleteProduct(String productId);
 

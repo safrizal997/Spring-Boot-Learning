@@ -32,7 +32,7 @@ public class CategoriesEntityController {
 
     @DeleteMapping("/{category_Id}")
     Integer deleteCategories(@PathVariable("category_Id") String category_Id) {
-        return categoriesService.deleteCategories(category_Id);
+        return categoriesService.deleteCategory(category_Id);
     }
 
 }
